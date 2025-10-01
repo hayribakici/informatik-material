@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Mein Steckbrief</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+                margin-top: 30px;
+            }
+            .container {
+                border: 1px solid #ccc;
+                padding: 20px;
+                width: 600px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .description {
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 12px;
+                padding: 15px;
+                margin-bottom: 20px;
+                box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            td {
+                padding: 8px;
+                vertical-align: top;
+            }
+            input {
+                width: 60%;
+                padding: 5px;
+                border: 1px solid #aaa;
+                border-radius: 3px;
+            }
+            .datatype {
+                font-size: 0.9em;
+                color: #555;
+                margin-left: 8px;
+            }
+            .datatype.valid {
+                color: #155724; /* dunkles Grün für Text */
+                background-color: #d6f5d6; /* pastellgrün */
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+            .error {
+                color: #b30000;
+                font-size: 0.9em;
+                margin-top: 4px;
+            }
+            .valid {
+                background-color: #d6f5d6;
+            }
+            .invalid {
+                background-color: #ffd6cc;
+            }
+            .buttons {
+                text-align: center;
+                margin-top: 20px;
+            }
+            button {
+                padding: 10px 20px;
+                margin: 5px;
+                border: none;
+                border-radius: 5px;
+                background-color: #4285f4;
+                color: white;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #306ac9;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Mein Steckbrief</h1>
+            <div class="description">
+                <p>
+                    <b>Fülle diesen Steckbrief mit deinen Daten aus.</b><br />
+                    Die Daten bleiben auf diesem Computer und werden nirgends
+                    gesendet.
+                </p>
+                <ul>
+                    <li>
+                        Anführungszeichen <code>""</code> für Text (z.B. Vorname
+                        <code>"Max"</code>)
+                    </li>
+                    <li>Punkt <code>.</code> für Kommazahlen (z.B. 1.43)</li>
+                    <li><code>falsch</code> für falsch</li>
+                    <li><code>wahr</code> für wahr</li>
+                    <li>
+                        Datum im Format <code>TT.MM.YYYY</code> (z.B.
+                        <code>"01.10.2025"</code>)
+                    </li>
+                </ul>
+            </div>
+            <form id="steckbriefForm">
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td>
+                            <input type="text" name="name" />
+                            <span class="datatype" id="type_name"></span>
+                            <div class="error" id="error_name"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vorname:</td>
+                        <td>
+                            <input type="text" name="vorname" />
+                            <span class="datatype" id="type_vorname"></span>
+                            <div class="error" id="error_vorname"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Geburtsdatum:</td>
+                        <td>
+                            <input type="text" name="geburtsdatum" />
+                            <span class="datatype" id="type_geburtsdatum"></span>
+                            <div class="error" id="error_geburtsdatum"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Geburtsort:</td>
+                        <td>
+                            <input type="text" name="geburtsort" />
+                            <span class="datatype" id="type_geburtsort"></span>
+                            <div class="error" id="error_geburtsort"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Augenfarbe:</td>
+                        <td>
+                            <input type="text" name="augenfarbe" />
+                            <span class="datatype" id="type_augenfarbe"></span>
+                            <div class="error" id="error_augenfarbe"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Größe (in cm):</td>
+                        <td>
+                            <input type="text" name="groesse_cm" />
+                            <span class="datatype" id="type_groesse_cm"></span>
+                            <div class="error" id="error_groesse_cm"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Größe (in m):</td>
+                        <td>
+                            <input type="text" name="groesse_m" />
+                            <span class="datatype" id="type_groesse_m"></span>
+                            <div class="error" id="error_groesse_m"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ich bin ein Junge
+                            (<code>falsch</code>/<code>wahr</code>):
+                        </td>
+                        <td>
+                            <input type="text" name="junge" />
+                            <span class="datatype" id="type_junge"></span>
+                            <div class="error" id="error_junge"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ich bin ein Mädchen
+                            (<code>falsch</code>/<code>wahr</code>):
+                        </td>
+                        <td>
+                            <input type="text" name="maedchen" />
+                            <span class="datatype" id="type_maedchen"></span>
+                            <div class="error" id="error_maedchen"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Anzahl der Geschwister:</td>
+                        <td>
+                            <input type="text" name="geschwister" />
+                            <span class="datatype" id="type_geschwister"></span>
+                            <div class="error" id="error_geschwister"></div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="buttons">
+                    <button type="button" id="submitBtn">Abschicken</button>
+                    <button type="reset" id="resetBtn">Zurücksetzen</button>
+                    <div id="form_success"></div>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            const form = document.getElementById("steckbriefForm");
+            const submitBtn = document.getElementById("submitBtn");
+            const resetBtn = document.getElementById("resetBtn");
+
+            const isString = (val) => /^".+"$/.test(val);
+            const isInt = (val) => /^\d+$/.test(val);
+            const isFloat = (val) => /^\d+\.\d+$/.test(val);
+            const isBool = (val) => /^(wahr|falsch)$/i.test(val);
+            const isDate = (val) => {
+                const match = /^"(\d{2})\.(\d{2})\.(\d{4})"$/.exec(val);
+                if (!match) return false;
+                const day = parseInt(match[1], 10);
+                const month = parseInt(match[2], 10);
+                if (month < 1 || month > 12) return false;
+                if (day < 1 || day > 31) return false;
+                return true;
+            };
+
+            function checkField(field, validator, errorId, errorMsg, typeName) {
+                const input = form[field];
+                const errorDiv = document.getElementById(errorId);
+                const typeSpan = document.getElementById("type_" + field);
+
+                if (validator(input.value)) {
+                    input.classList.remove("invalid");
+                    input.classList.add("valid");
+                    errorDiv.textContent = "";
+                    if (typeSpan) {
+                        typeSpan.textContent = typeName;
+                        typeSpan.classList.add("valid"); // Klasse hinzufügen
+                    }
+                    return true;
+                } else {
+                    input.classList.remove("valid");
+                    input.classList.add("invalid");
+                    errorDiv.textContent = errorMsg;
+                    if (typeSpan) {
+                        typeSpan.textContent = "";
+                        typeSpan.classList.remove("valid"); // Klasse entfernen
+                    }
+                    return false;
+                }
+            }
+
+            function validateForm() {
+                let allValid = true;
+                allValid &= checkField(
+                    "name",
+                    isString,
+                    "error_name",
+                    'Muss ein String sein. Z.B. "Mustermann"',
+                    "String",
+                );
+                allValid &= checkField(
+                    "vorname",
+                    isString,
+                    "error_vorname",
+                    'Muss ein String sein. Z.B. "Max"',
+                    "String",
+                );
+                allValid &= checkField(
+                    "geburtsdatum",
+                    isDate,
+                    "error_geburtsdatum",
+                    "Muss im Format TT.MM.YYYY sein.",
+                    "Datum",
+                );
+                allValid &= checkField(
+                    "geburtsort",
+                    isString,
+                    "error_geburtsort",
+                    'Muss ein String sein. Z.B. "Berlin"',
+                    "String",
+                );
+                allValid &= checkField(
+                    "augenfarbe",
+                    isString,
+                    "error_augenfarbe",
+                    'Muss ein String sein. Z.B. "braun"',
+                    "String",
+                );
+                allValid &= checkField(
+                    "groesse_cm",
+                    isInt,
+                    "error_groesse_cm",
+                    "Muss eine ganze Zahl (int) sein. Z.B. 163",
+                    "Int",
+                );
+                allValid &= checkField(
+                    "groesse_m",
+                    isFloat,
+                    "error_groesse_m",
+                    "Muss eine Kommazahl (float) sein. Z.B. 1.63",
+                    "Float",
+                );
+                allValid &= checkField(
+                    "junge",
+                    isBool,
+                    "error_junge",
+                    'Nur bool ("wahr" oder "falsch") erlaubt.',
+                    "Bool",
+                );
+                allValid &= checkField(
+                    "maedchen",
+                    isBool,
+                    "error_maedchen",
+                    'Nur bool ("wahr" oder "falsch") erlaubt.',
+                    "Bool",
+                );
+                allValid &= checkField(
+                    "geschwister",
+                    isInt,
+                    "error_geschwister",
+                    "Muss eine ganze Zahl (int) sein. Z.B. 2",
+                    "Int",
+                );
+
+                const successDiv = document.getElementById("form_success");
+                if (allValid) {
+                    successDiv.className = "valid";
+                    successDiv.textContent =
+                        "Alle Daten sind korrekt eingegeben!";
+                } else {
+                    successDiv.className = "invalid";
+                    successDiv.textContent =
+                        "Es wurden ungültige Daten eingegeben.";
+                }
+            }
+
+            function resetForm() {
+                const inputs = document.querySelectorAll("input");
+                inputs.forEach((input) =>
+                    input.classList.remove("valid", "invalid"),
+                );
+                document
+                    .querySelectorAll(".error")
+                    .forEach((err) => (err.textContent = ""));
+                document
+                    .querySelectorAll(".datatype")
+                    .forEach((span) => (span.textContent = ""));
+                const successDiv = document.getElementById("form_success");
+                successDiv.className = "";
+                successDiv.textContent = "";
+            }
+
+            submitBtn.addEventListener("click", validateForm);
+            resetBtn.addEventListener("click", resetForm);
+        </script>
+    </body>
+</html>
