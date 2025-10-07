@@ -11,4 +11,3 @@ menu.main = { weight = 1 }
 Hier findest du meine Arbeitsblätter und kleine Programme.
 
 - [Steckbrief](steckbrief/index.html)
-- [Programm XY](programme/xyz.html)
