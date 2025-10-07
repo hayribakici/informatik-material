@@ -8,6 +8,6 @@ menu.main = { weight = 1 }
 # Material
 
 
-Hier findest du meine Arbeitsblätter und kleine Programme.
+Hier findest du Arbeitsmaterial und kleine Programme.
 
 - [Steckbrief](steckbrief/index.html)
