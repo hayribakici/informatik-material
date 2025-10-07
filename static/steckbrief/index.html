@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>Mein Steckbrief</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -81,6 +83,41 @@
             }
             button:hover {
                 background-color: #306ac9;
+            }
+            /* --- Spinner-Stile --- */
+            #loader {
+                display: none; /* zunächst unsichtbar */
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+                text-align: center;
+            }
+
+            .spinner {
+                border: 6px solid #f3f3f3;
+                border-top: 6px solid #007bff;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                animation: spin 1s linear infinite;
+                margin: 0 auto;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            #loader p {
+                margin-top: 12px;
+                color: #333;
+                font-size: 14px;
             }
         </style>
     </head>
@@ -200,6 +237,12 @@
                     <button type="button" id="submitBtn">Abschicken</button>
                     <button type="reset" id="resetBtn">Zurücksetzen</button>
                     <div id="form_success"></div>
+                    <button id="savePdfBtn">Als PDF speichern</button>
+                </div>
+                <!-- Ladespinner -->
+                <div id="loader">
+                    <div class="spinner"></div>
+                    <p>PDF wird erstellt...</p>
                 </div>
             </form>
         </div>
@@ -208,6 +251,7 @@
             const form = document.getElementById("steckbriefForm");
             const submitBtn = document.getElementById("submitBtn");
             const resetBtn = document.getElementById("resetBtn");
+            const savePdfBtn = document.getElementById("savePdfBtn");
 
             const isString = (val) => /^".+"$/.test(val);
             const isInt = (val) => /^\d+$/.test(val);
@@ -350,8 +394,36 @@
                 successDiv.textContent = "";
             }
 
+            async function saveAsPdf() {
+                const loader = document.getElementById("loader");
+                loader.style.display = "block";
+
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const content = document.getElementById("steckbriefForm");
+
+                    const canvas = await html2canvas(content, { scale: 2 });
+                    const imgData = canvas.toDataURL("image/png");
+
+                    const pdf = new jsPDF("p", "mm", "a4");
+                    const pageWidth = pdf.internal.pageSize.getWidth();
+                    const imgHeight = (canvas.height * pageWidth) / canvas.width;
+
+                    pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
+                    pdf.save("steckbrief.pdf");
+                } catch (err) {
+                    console.error("Fehler bei der PDF-Erstellung:", err);
+                    alert(
+                        "Fehler bei der PDF-Erstellung. Siehe Konsole für Details.",
+                    );
+                } finally {
+                    loader.style.display = "none";
+                }
+            }
+
             submitBtn.addEventListener("click", validateForm);
             resetBtn.addEventListener("click", resetForm);
+            savePdfBtn.addEventListener("click", saveAsPdf);
         </script>
     </body>
 </html>
