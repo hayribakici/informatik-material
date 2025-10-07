@@ -122,7 +122,7 @@
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="container" id="main">
             <h1>Mein Steckbrief</h1>
             <div class="description">
                 <p>
@@ -237,7 +237,9 @@
                     <button type="button" id="submitBtn">Abschicken</button>
                     <button type="reset" id="resetBtn">Zurücksetzen</button>
                     <div id="form_success"></div>
-                    <button id="savePdfBtn">Als PDF speichern</button>
+                    <button id="savePdfBtn" type="button">
+                        Als PDF speichern
+                    </button>
                 </div>
                 <!-- Ladespinner -->
                 <div id="loader">
@@ -400,15 +402,22 @@
 
                 try {
                     const { jsPDF } = window.jspdf;
-                    const content = document.getElementById("steckbriefForm");
-
-                    const canvas = await html2canvas(content, { scale: 2 });
-                    const imgData = canvas.toDataURL("image/png");
-
                     const pdf = new jsPDF("p", "mm", "a4");
+                    const content = document.getElementById("main");
+                    const canvas = await html2canvas(content, {
+                        scale: 3,
+                        ignoreElements: (e) => {
+                            if (e.id == "loader") {
+                                return true;
+                            }
+                            return false;
+                        },
+                    });
+                    const imgData = canvas.toDataURL("image/png");
                     const pageWidth = pdf.internal.pageSize.getWidth();
                     const imgHeight = (canvas.height * pageWidth) / canvas.width;
 
+                    await new Promise((r) => setTimeout(r, 1000));
                     pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
                     pdf.save("steckbrief.pdf");
                 } catch (err) {
