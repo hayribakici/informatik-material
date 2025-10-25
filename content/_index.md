@@ -9,6 +9,6 @@ Hier findest du Arbeitsmaterial und kleine Programme.
 
 |Material | Beschreibung |
 |---------|--------------|
-|[Steckbrief](steckbrief/index.html) | Formular zur Einführung und Unterscheitung von Datentypen `String`, `int`, `float` |
+|[Steckbrief](steckbrief/index.html) | Formular zur Einführung und Unterscheitung von Datentypen `String`, `int`, `float` und `bool` |
 
 <!--  - [Sierpinski-Dreieck](sierpinski/index.html) -->
