@@ -5,9 +5,10 @@ title = 'Arbeitsblätter'
 menu.main = { weight = 1 }
 +++
 
-# Material
-
-
 Hier findest du Arbeitsmaterial und kleine Programme.
 
-- [Steckbrief](steckbrief/index.html)
+|Material | Beschreibung |
+|---------|--------------|
+|[Steckbrief](steckbrief/index.html) | Formular zur Einführung und Unterscheitung von Datentypen `String`, `int`, `float` |
+
+<!--  - [Sierpinski-Dreieck](sierpinski/index.html) -->
