@@ -10,5 +10,6 @@ Hier findest du Arbeitsmaterial und kleine Programme.
 |Material | Beschreibung |
 |---------|--------------|
 |[Steckbrief](steckbrief/index.html) | Formular zur Einführung und Unterscheidung von Datentypen `String`, `int`, `float` und `bool` |
+|[InformaSinn](informasinn/index.html) | Ein kleines Programm, das Daten aufnimmt und ensprechende Informationen über diese ausgibt.|
 
 <!--  - [Sierpinski-Dreieck](sierpinski/index.html) -->
