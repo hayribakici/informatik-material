@@ -1,6 +1,6 @@
 // netlify/functions/hf_proxy.js
 export async function handler(event) {
-  const defaultModel = 'mistralai/Mistral-7B-Instruct-v0.2:featherless-ai';
+  const defaultModel = 'huihui-ai/Qwen2.5-14B-Instruct-abliterated-v2:featherless-ai';
   const defaultUrl = 'https://router.huggingface.co/v1/chat/completions';
 
   try {
