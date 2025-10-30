@@ -1,7 +1,11 @@
 [build]
   publish = "public"
   command = "hugo --gc --minify"
-  functions = "functions"
+
+[edge_functions]
+  functions = "hf_proxy"
+  path = ".netlify/functions/hf_proxy"
+  
 
 [context.production.environment]
   HUGO_VERSION = "0.149.0"
