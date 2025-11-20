@@ -3,7 +3,7 @@
   command = "hugo --gc --minify"
 
 [[edge_functions]]
-  path = "/.netlify/functions/hf_proxy"
+  path = "/api/hf_proxy"
   function = "hf_proxy"
   
 
