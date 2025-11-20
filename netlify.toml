@@ -2,7 +2,7 @@
   publish = "public"
   command = "hugo --gc --minify"
 
-[edge_functions]
+[[edge_functions]]
   function = "hf_proxy"
   path = ".netlify/functions/hf_proxy"
   
