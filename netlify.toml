@@ -2,8 +2,8 @@
   publish = "public"
   command = "hugo --gc --minify"
 
-[functions]]
-  directory = "netlify/hf_proxy"
+[functions]
+  directory = "netlify/functions/hf_proxy"
 
 
 [context.production.environment]
