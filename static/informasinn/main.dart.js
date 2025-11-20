@@ -71828,7 +71828,7 @@ rX(a){return this.RF(a)},
 RF(a){var s=0,r=A.S(t.N),q,p=this,o,n,m
 var $async$rX=A.O(function(b,c){if(b===1)return A.P(c,r)
 while(true)switch(s){case 0:o=p.b
-n=A.fm(o===$?p.b="https://info-material.netlify.app/api/hf_proxy":o,0,null)
+n=A.fm(o===$?p.b="https://info-material.netlify.app/.netlify/functions/hf_proxy":o,0,null)
 m=p.ga2p()
 s=3
 return A.T(A.aEJ(n,p.Xp(a),m),$async$rX)
