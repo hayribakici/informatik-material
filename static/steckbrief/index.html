@@ -260,7 +260,7 @@
             const isFloat = (val) => /^\d+\.\d+$/.test(val);
             const isBool = (val) => /^(wahr|falsch)$/i.test(val);
             const isDate = (val) => {
-                const match = /^"(\d{2})\.(\d{2})\.(\d{4})"$/.exec(val);
+                const match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(val);
                 if (!match) return false;
                 const day = parseInt(match[1], 10);
                 const month = parseInt(match[2], 10);
