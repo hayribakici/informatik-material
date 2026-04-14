@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <article class="markdown book-article">
+    {{- .Content -}}
+
+    {{ with .Pages }}
+      <table>
+        <tr><th>Material</th><th>Beschreibung</th></tr>
+        {{ range . }}
+          <tr>
+            <td><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+            <td>{{ .Params.description }}</td>
+          </tr>
+        {{ end }}
+      </table>
+    {{ end }}
+  </article>
+{{ end }}
