@@ -3,5 +3,6 @@ languageCode = 'de-de'
 title = 'Materialien für den Informatikunterricht'
 theme = "hugo-book"
 
-# [params]
-# BookComments = false
+[params]
+  BookComments = false
+  BookSection = '*'
