@@ -11,4 +11,4 @@ Hier ist eine Liste von Spielen in scratch.
 
 |Spiel | Beschreibung | Demo | Download | Link |
 |------|--------------|----------|------|------|
-|**CrabCatch**| Fange den Krebs, wenn er den Bildschirm berührt| [Demo](games/crabcatch/index.html)|[⬇️](games/crabcatch/crab_catch.sb3) | [Scratch Site](https://scratch.mit.edu/projects/1305852536/)|
+|**CrabCatch**| Fange den Krebs, wenn er den Bildschirm berührt| [Demo](/games/crabcatch/index.html)|[⬇️](/games/crabcatch/crab_catch.sb3) | [Scratch Site](https://scratch.mit.edu/projects/1305852536/)|
