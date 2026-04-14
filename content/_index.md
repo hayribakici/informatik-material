@@ -5,12 +5,14 @@ title = 'Arbeitsblätter'
 menu.main = { weight = 1 }
 +++
 
-Hier findest du Arbeitsmaterial und kleine Programme.
+Hier findest du Arbeitsmaterial und kleine Programme, die nicht unbedingt etwas mit Informatik zu tun haben.
 
-|Material | Beschreibung |
-|---------|--------------|
-|[Steckbrief](steckbrief/index.html) | Formular zur Einführung und Unterscheidung von Datentypen `String`, `int`, `float` und `bool` |
-|[InformaSinn](informasinn/index.html) | Ein kleines Programm, das Daten aufnimmt und ensprechende Informationen über diese ausgibt.|
-|[Urnenmodell Generator](urn/index.html) | Kleines Werkzeug zum Erzeugen von Urnenmodellen.|
+
+
+|Material | Beschreibung | Fach |
+|---------|--------------|------|
+|[Steckbrief](Unterricht/Informatik/info-material-site/static/steckbrief/index.html) | Formular zur Einführung und Unterscheidung von Datentypen `String`, `int`, `float` und `bool` | Informatik |
+|[InformaSinn](Unterricht/Informatik/info-material-site/static/informasinn/index.html) | Ein kleines Programm, das Daten aufnimmt und ensprechende Informationen über diese ausgibt.| Informatik |
+|[Urnenmodell Generator](Unterricht/Informatik/info-material-site/static/urn/index.html) | Kleines Werkzeug zum Erzeugen von Urnenmodellen.| Mathematik |
 
 <!--  - [Sierpinski-Dreieck](sierpinski/index.html) -->

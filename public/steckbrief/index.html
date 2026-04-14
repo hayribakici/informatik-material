@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>Mein Steckbrief</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -82,10 +84,45 @@
             button:hover {
                 background-color: #306ac9;
             }
+            /* --- Spinner-Stile --- */
+            #loader {
+                display: none; /* zunächst unsichtbar */
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+                text-align: center;
+            }
+
+            .spinner {
+                border: 6px solid #f3f3f3;
+                border-top: 6px solid #007bff;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                animation: spin 1s linear infinite;
+                margin: 0 auto;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            #loader p {
+                margin-top: 12px;
+                color: #333;
+                font-size: 14px;
+            }
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="container" id="main">
             <h1>Mein Steckbrief</h1>
             <div class="description">
                 <p>
@@ -103,7 +140,7 @@
                     <li><code>wahr</code> für wahr</li>
                     <li>
                         Datum im Format <code>TT.MM.YYYY</code> (z.B.
-                        <code>"01.10.2025"</code>)
+                        <code>01.10.2025</code>)
                     </li>
                 </ul>
             </div>
@@ -200,6 +237,14 @@
                     <button type="button" id="submitBtn">Abschicken</button>
                     <button type="reset" id="resetBtn">Zurücksetzen</button>
                     <div id="form_success"></div>
+                    <button id="savePdfBtn" type="button">
+                        Als PDF speichern
+                    </button>
+                </div>
+                <!-- Ladespinner -->
+                <div id="loader">
+                    <div class="spinner"></div>
+                    <p>PDF wird erstellt...</p>
                 </div>
             </form>
         </div>
@@ -208,13 +253,14 @@
             const form = document.getElementById("steckbriefForm");
             const submitBtn = document.getElementById("submitBtn");
             const resetBtn = document.getElementById("resetBtn");
+            const savePdfBtn = document.getElementById("savePdfBtn");
 
             const isString = (val) => /^".+"$/.test(val);
             const isInt = (val) => /^\d+$/.test(val);
             const isFloat = (val) => /^\d+\.\d+$/.test(val);
             const isBool = (val) => /^(wahr|falsch)$/i.test(val);
             const isDate = (val) => {
-                const match = /^"(\d{2})\.(\d{2})\.(\d{4})"$/.exec(val);
+                const match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(val);
                 if (!match) return false;
                 const day = parseInt(match[1], 10);
                 const month = parseInt(match[2], 10);
@@ -350,8 +396,43 @@
                 successDiv.textContent = "";
             }
 
+            async function saveAsPdf() {
+                const loader = document.getElementById("loader");
+                loader.style.display = "block";
+
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF("p", "mm", "a4");
+                    const content = document.getElementById("main");
+                    const canvas = await html2canvas(content, {
+                        scale: 3,
+                        ignoreElements: (e) => {
+                            if (e.id == "loader") {
+                                return true;
+                            }
+                            return false;
+                        },
+                    });
+                    const imgData = canvas.toDataURL("image/png");
+                    const pageWidth = pdf.internal.pageSize.getWidth();
+                    const imgHeight = (canvas.height * pageWidth) / canvas.width;
+
+                    await new Promise((r) => setTimeout(r, 1000));
+                    pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
+                    pdf.save("steckbrief.pdf");
+                } catch (err) {
+                    console.error("Fehler bei der PDF-Erstellung:", err);
+                    alert(
+                        "Fehler bei der PDF-Erstellung. Siehe Konsole für Details.",
+                    );
+                } finally {
+                    loader.style.display = "none";
+                }
+            }
+
             submitBtn.addEventListener("click", validateForm);
             resetBtn.addEventListener("click", resetForm);
+            savePdfBtn.addEventListener("click", saveAsPdf);
         </script>
     </body>
 </html>
