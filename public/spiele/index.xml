@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spieles on Materialien für den Informatikunterricht</title>
+    <link>//localhost:1313/spiele/</link>
+    <description>Recent content in Spieles on Materialien für den Informatikunterricht</description>
+    <generator>Hugo</generator>
+    <language>de-de</language>
+    <lastBuildDate>Tue, 14 Apr 2026 17:52:14 +0200</lastBuildDate>
+    <atom:link href="//localhost:1313/spiele/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spiele</title>
+      <link>//localhost:1313/spiele/spiele/</link>
+      <pubDate>Tue, 14 Apr 2026 17:52:14 +0200</pubDate>
+      <guid>//localhost:1313/spiele/spiele/</guid>
+      <description>&lt;p&gt;Hier ist eine Liste von Spielen in scratch.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Spiel&lt;/th&gt;&#xA;          &lt;th&gt;Beschreibung&lt;/th&gt;&#xA;          &lt;th&gt;Demo&lt;/th&gt;&#xA;          &lt;th&gt;Download&lt;/th&gt;&#xA;          &lt;th&gt;Link&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;**CrabCatch&lt;/td&gt;&#xA;          &lt;td&gt;Fanke den Krebs, wenn er den Bildschirm berührt&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;Unterricht/info-material-site/static/games/crabcatch/index.html&#34;&gt;Demo&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;Unterricht/info-material-site/static/games/crabcatch/cab_catch.sb3&#34;&gt;⬇️&lt;/a&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://scratch.mit.edu/projects/1305852536/&#34;&gt;Scratch Site&lt;/a&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;</description>
+    </item>
+  </channel>
+</rss>

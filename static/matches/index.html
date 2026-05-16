@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Streichholz-Kette</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                display: flex;
+                gap: 1vw;
+                margin: 20px;
+            }
+
+            #left {
+                width: 260px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .row {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                margin-bottom: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+            }
+
+            label {
+                font-size: 14px;
+            }
+
+            input,
+            select,
+            button {
+                padding: 6px 8px;
+                font-size: 14px;
+            }
+
+            #right {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            #stage {
+                width: 900px;
+                height: 600px;
+                border: 1px solid #ccc;
+                background: #f7f7f7;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="left">
+            <div class="row">
+                <label for="corners">Ecken</label>
+                <select id="corners">
+                    <option value="3">Dreieck</option>
+                    <option value="4">Quadrat</option>
+                    <option value="6">Hexagon</option>
+                </select>
+
+                <label for="startCount">Initiale Anzahl Figuren</label>
+                <input id="startCount" type="number" min="1" value="1" />
+
+                <label for="steps">Weitere Schritte</label>
+                <input id="steps" type="number" min="0" value="4" />
+
+                <label for="sideLen">Streichholz-Länge</label>
+                <input id="sideLen" type="number" min="20" value="70" />
+
+                <button id="renderBtn">Neu zeichnen</button>
+            </div>
+        </div>
+
+        <div id="right">
+            <svg id="stage" viewBox="0 0 900 600"></svg>
+        </div>
+
+        <script>
+            const svg = document.getElementById("stage");
+            const cornersInput = document.getElementById("corners");
+            const startCountInput = document.getElementById("startCount");
+            const stepsInput = document.getElementById("steps");
+            const sideLenInput = document.getElementById("sideLen");
+            const renderBtn = document.getElementById("renderBtn");
+
+            const SVG_NS = "http://www.w3.org/2000/svg";
+
+            function clearSVG(el) {
+                while (el.firstChild) el.removeChild(el.firstChild);
+            }
+
+            const MATCH_SVG_WIDTH = 11.019245;
+            const MATCH_SVG_HEIGHT = 94.451492;
+            const MATCH_ASPECT = MATCH_SVG_WIDTH / MATCH_SVG_HEIGHT;
+
+            function createMatchstick(x1, y1, x2, y2) {
+                const dx = x2 - x1;
+                const dy = y2 - y1;
+                const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+                const length = Math.hypot(dx, dy);
+                const displayWidth = length * MATCH_ASPECT;
+
+                const g = document.createElementNS(SVG_NS, "g");
+                g.setAttribute(
+                    "transform",
+                    `translate(${x1}, ${y1}) rotate(${angle - 90})`,
+                );
+
+                const img = document.createElementNS(SVG_NS, "image");
+                img.setAttribute("href", "match.svg");
+
+                // SVG ist vertikal, daher Startpunkt oben mittig auf (0,0)
+                img.setAttribute("x", String(-displayWidth / 2));
+                img.setAttribute("y", "0");
+
+                img.setAttribute("width", String(displayWidth));
+                img.setAttribute("height", String(length));
+                img.setAttribute("preserveAspectRatio", "none");
+
+                g.appendChild(img);
+                return g;
+            }
+
+            function polygonPoints(cx, cy, sides, sideLen, rotationDeg = -90) {
+                const points = [];
+                const radius = sideLen / (2 * Math.sin(Math.PI / sides));
+                const startAngle = (rotationDeg * Math.PI) / 180;
+
+                for (let i = 0; i < sides; i++) {
+                    const angle = startAngle + (i * 2 * Math.PI) / sides;
+                    points.push({
+                        x: cx + radius * Math.cos(angle),
+                        y: cy + radius * Math.sin(angle),
+                    });
+                }
+
+                return points;
+            }
+
+            function edgeKey(a, b) {
+                const p1 = `${a.x.toFixed(3)},${a.y.toFixed(3)}`;
+                const p2 = `${b.x.toFixed(3)},${b.y.toFixed(3)}`;
+                return [p1, p2].sort().join("|");
+            }
+
+            function drawPolygonFromPoints(target, points, drawnEdges) {
+                for (let i = 0; i < points.length; i++) {
+                    const a = points[i];
+                    const b = points[(i + 1) % points.length];
+                    const key = edgeKey(a, b);
+
+                    if (!drawnEdges.has(key)) {
+                        drawnEdges.add(key);
+                        target.appendChild(createMatchstick(a.x, a.y, b.x, b.y));
+                    }
+                }
+            }
+
+            function drawChain(target, sides, figureCount, sideLen) {
+                const drawnEdges = new Set();
+
+                const apothem = sideLen / (2 * Math.tan(Math.PI / sides));
+                const circumRadius = sideLen / (2 * Math.sin(Math.PI / sides));
+
+                const startX = 120;
+                const centerY = 70;
+
+                if (sides === 3) {
+                    const stepX = sideLen / 2;
+
+                    for (let i = 0; i < figureCount; i++) {
+                        const points = polygonPoints(
+                            startX + circumRadius + i * stepX,
+                            centerY,
+                            3,
+                            sideLen,
+                            -90,
+                        );
+                        drawPolygonFromPoints(target, points, drawnEdges);
+                    }
+                    return;
+                }
+
+                if (sides === 4) {
+                    const stepX = sideLen;
+
+                    for (let i = 0; i < figureCount; i++) {
+                        const points = polygonPoints(
+                            startX + sideLen / 2 + i * stepX,
+                            centerY,
+                            4,
+                            sideLen,
+                            -45,
+                        );
+                        drawPolygonFromPoints(target, points, drawnEdges);
+                    }
+                    return;
+                }
+
+                if (sides === 6) {
+                    const stepX = 2 * apothem;
+
+                    for (let i = 0; i < figureCount; i++) {
+                        const points = polygonPoints(
+                            startX + circumRadius + i * stepX,
+                            centerY,
+                            6,
+                            sideLen,
+                            -30,
+                        );
+                        drawPolygonFromPoints(target, points, drawnEdges);
+                    }
+                }
+            }
+
+            function renderRows() {
+                clearSVG(svg);
+
+                const sides = parseInt(cornersInput.value, 10);
+                const startCount = parseInt(startCountInput.value, 10);
+                const steps = parseInt(stepsInput.value, 10);
+                const sideLen = parseInt(sideLenInput.value, 10);
+
+                const rowHeight = 120;
+
+                for (let row = 0; row <= steps; row++) {
+                    const group = document.createElementNS(SVG_NS, "g");
+                    group.setAttribute(
+                        "transform",
+                        `translate(0, ${row * rowHeight})`,
+                    );
+                    svg.appendChild(group);
+
+                    const label = document.createElementNS(SVG_NS, "text");
+                    label.setAttribute("x", "20");
+                    label.setAttribute("y", "70");
+                    label.setAttribute("font-size", "24");
+                    label.textContent = String(startCount + row);
+                    group.appendChild(label);
+
+                    drawChain(group, sides, startCount + row, sideLen);
+                }
+            }
+
+            renderBtn.addEventListener("click", renderRows);
+            renderRows();
+        </script>
+    </body>
+</html>

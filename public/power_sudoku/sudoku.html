@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Potenz-Sudoku 9×9</title>
+
+        <!-- MathJax -->
+        <script>
+            window.MathJax = { tex: { inlineMath: [["\\(", "\\)"]] } };
+        </script>
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+        ></script>
+
+        <style>
+            body {
+                font-family:
+                    system-ui,
+                    Segoe UI,
+                    Roboto,
+                    Arial;
+                margin: 16px;
+                color: #111;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(9, 60px);
+                gap: 0;
+                border: 3px solid #111;
+                width: max-content;
+            }
+            .cell {
+                position: relative;
+                border: 1px solid #111;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .cell:nth-child(3n) {
+                border-right-width: 3px;
+            }
+            .rowEnd {
+                border-bottom-width: 3px;
+            }
+            .given {
+                background: #f2f2f2;
+            }
+            .expr {
+                font-size: 12px;
+                line-height: 1.05;
+                text-align: center;
+                padding: 2px;
+            }
+            input {
+                width: 100%;
+                height: 100%;
+                border: 0;
+                text-align: center;
+                font-size: 20px;
+                font-weight: 700;
+                background: transparent;
+                outline: none;
+            }
+            .bad {
+                outline: 2px solid #b00020;
+                outline-offset: -2px;
+                background: rgba(176, 0, 32, 0.08);
+            }
+            .top {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                margin-bottom: 10px;
+                flex-wrap: wrap;
+            }
+            button {
+                padding: 8px 10px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                background: #fff;
+                font-weight: 700;
+                cursor: pointer;
+            }
+            .status {
+                padding: 6px 10px;
+                border-radius: 8px;
+                background: #f5f5f5;
+                border: 1px solid #e6e6e6;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="top">
+            <button id="new">Neues Sudoku</button>
+            <button id="check">Prüfen</button>
+            <span class="status" id="status">—</span>
+        </div>
+
+        <div id="grid" class="grid" aria-label="Sudoku"></div>
+
+        <script>
+            /* ---------------------------
+   1) Sudoku generator adapter
+   Replace this with a library call:
+   Should return:
+     solution: 9x9 numbers 1..9
+     puzzle:   9x9 numbers 0 for blank, else given
+----------------------------*/
+            function generateSudoku() {
+                // PLACEHOLDER: fixed valid grid (Latin square). Replace with a real generator.
+                const sol = Array.from({ length: 9 }, (_, r) =>
+                    Array.from(
+                        { length: 9 },
+                        (_, c) => ((r * 3 + Math.floor(r / 3) + c) % 9) + 1,
+                    ),
+                );
+                const puz = sol.map((row) =>
+                    row.map((v) => (Math.random() < 0.45 ? v : 0)),
+                ); // random givens, not guaranteed unique
+                return { solution: sol, puzzle: puz };
+            }
+
+            /* ---------------------------
+   2) Potenz-Aufgabengenerator
+   returns LaTeX string that evaluates to digit d (1..9)
+----------------------------*/
+            function pick(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+
+            function exprForDigit(d) {
+                const templates = {
+                    1: [
+                        String.raw`2^{7}:2^{7}`,
+                        String.raw`(-5)^{0}`,
+                        String.raw`\left(\frac{3}{7}\right)^{0}`,
+                        String.raw`\frac{9^{2}}{9^{2}}`,
+                    ],
+                    2: [
+                        String.raw`2^{9}:2^{8}`,
+                        String.raw`\frac{2^{6}}{2^{5}}`,
+                        String.raw`(-2)^{6}:(-2)^{5}`,
+                        String.raw`\left(\frac12\right)^{-1}`,
+                    ],
+                    3: [
+                        String.raw`3^{5}:3^{4}`,
+                        String.raw`(-3)^{2}:(-3)`,
+                        String.raw`\left(\frac13\right)^{-1}`,
+                        String.raw`3^{1}\cdot 2^{0}`,
+                    ],
+                    4: [
+                        String.raw`2^{10}:2^{8}`,
+                        String.raw`(2^{2})^{1}`,
+                        String.raw`\left(\frac12\right)^{-2}`,
+                        String.raw`\frac{(-2)^{4}}{(-2)^{2}}`,
+                    ],
+                    5: [
+                        String.raw`5^{7}:5^{6}`,
+                        String.raw`5^{0}\cdot 5^{1}`,
+                        String.raw`\left(\frac15\right)^{-1}`,
+                        String.raw`\frac{5^{3}}{5^{2}}`,
+                    ],
+                    6: [
+                        String.raw`2^{1}\cdot 3^{1}`,
+                        String.raw`\frac{2^{7}\cdot 3^{1}}{2^{6}}`,
+                        String.raw`\frac{(-3)^{2}}{3}\cdot 2^{1}`,
+                        String.raw`3^{1}\cdot 2^{1}\cdot 5^{0}`,
+                    ],
+                    7: [
+                        String.raw`7^{4}:7^{3}`,
+                        String.raw`7^{0}\cdot 7^{1}`,
+                        String.raw`\left(\frac17\right)^{-1}`,
+                        String.raw`\frac{(-7)^{2}}{7}`,
+                    ],
+                    8: [
+                        String.raw`2^{3}`,
+                        String.raw`\frac{2^{9}}{2^{6}}`,
+                        String.raw`(2^{1})^{3}`,
+                        String.raw`\frac{(-2)^{6}}{(-2)^{3}}`,
+                    ],
+                    9: [
+                        String.raw`3^{2}`,
+                        String.raw`\frac{3^{6}}{3^{4}}`,
+                        String.raw`(3^{1})^{2}`,
+                        String.raw`\frac{(-3)^{4}}{(-3)^{2}}`,
+                    ],
+                };
+                return pick(templates[d]);
+            }
+
+            /* ---------------------------
+   3) Render
+----------------------------*/
+            let current = null; // {solution, puzzle}
+            let inputs = []; // store input elements for blanks
+
+            function build() {
+                current = generateSudoku();
+                inputs = [];
+                const grid = document.getElementById("grid");
+                grid.innerHTML = "";
+
+                for (let r = 0; r < 6; r++) {
+                    for (let c = 0; c < 6; c++) {
+                        const cell = document.createElement("div");
+                        cell.className = "cell";
+                        if ((r + 1) % 2 === 0) cell.classList.add("rowEnd");
+
+                        const given = current.puzzle[r][c];
+                        if (given) {
+                            cell.classList.add("given");
+                            // show as plain digit (you can also show expression here if you want)
+                            cell.textContent = given;
+                        } else {
+                            const d = current.solution[r][c];
+                            const expr = exprForDigit(d);
+                            const exprDiv = document.createElement("div");
+                            exprDiv.className = "expr";
+                            exprDiv.innerHTML = `\\(${expr}\\)`;
+                            cell.appendChild(exprDiv);
+
+                            const inp = document.createElement("input");
+                            inp.maxLength = 1;
+                            inp.inputMode = "numeric";
+                            inp.dataset.r = r;
+                            inp.dataset.c = c;
+                            inp.addEventListener("input", () => {
+                                inp.value = inp.value
+                                    .replace(/[^1-6]/g, "")
+                                    .slice(0, 1);
+                                cell.classList.remove("bad");
+                            });
+                            cell.appendChild(inp);
+                            inputs.push({ inp, cell });
+                        }
+                        grid.appendChild(cell);
+                    }
+                }
+
+                // re-typeset MathJax
+                if (window.MathJax?.typesetPromise) {
+                    window.MathJax.typesetPromise();
+                }
+                setStatus("Neues Sudoku erstellt.");
+            }
+
+            function setStatus(msg) {
+                document.getElementById("status").textContent = msg;
+            }
+
+            function check() {
+                let wrong = 0,
+                    empty = 0;
+                for (const { inp, cell } of inputs) {
+                    const r = +inp.dataset.r,
+                        c = +inp.dataset.c;
+                    const v = inp.value ? +inp.value : 0;
+                    if (!v) {
+                        empty++;
+                        cell.classList.remove("bad");
+                        continue;
+                    }
+                    if (v !== current.solution[r][c]) {
+                        wrong++;
+                        cell.classList.add("bad");
+                    } else {
+                        cell.classList.remove("bad");
+                    }
+                }
+                if (wrong === 0 && empty === 0)
+                    setStatus("Korrekt und vollständig.");
+                else if (wrong === 0)
+                    setStatus(`Keine Fehler, aber ${empty} Felder leer.`);
+                else setStatus(`${wrong} Fehler, ${empty} leer.`);
+            }
+
+            document.getElementById("new").addEventListener("click", build);
+            document.getElementById("check").addEventListener("click", check);
+
+            build();
+        </script>
+    </body>
+</html>

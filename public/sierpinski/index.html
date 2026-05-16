@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Sierpinski-Schieberegler</title>
+        <style>
+            :root {
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    Helvetica,
+                    Arial;
+                line-height: 1.4;
+            }
+            body {
+                margin: 0;
+                padding: 24px;
+                background: #f7f7f7;
+                color: #111;
+            }
+            .card {
+                max-width: 980px;
+                margin: 18px auto;
+                padding: 18px;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+            }
+            h1 {
+                font-size: 1.5rem;
+                margin: 0 0 8px;
+            }
+            p.description {
+                margin: 0 0 18px;
+                color: #444;
+            }
+            .controls {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+            .controls label {
+                font-weight: 600;
+            }
+            .slider-wrap {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            input[type="range"] {
+                width: 100%;
+            }
+            #levelValue {
+                min-width: 36px;
+                text-align: center;
+                font-variant-numeric: tabular-nums;
+            }
+            .canvas-wrap {
+                width: 100%;
+                border-radius: 8px;
+                overflow: hidden;
+                background: #222;
+            }
+            canvas {
+                display: block;
+                width: 100%;
+                height: 400px;
+            }
+            footer.note {
+                margin-top: 12px;
+                font-size: 0.85rem;
+                color: #666;
+            }
+            @media (max-width: 600px) {
+                body {
+                    padding: 12px;
+                }
+                .card {
+                    padding: 12px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main class="card">
+            <h1>Sierpinski-Dreieck</h1>
+
+            <div class="controls">
+                <label for="level">Level</label>
+                <div class="slider-wrap">
+                    <input
+                        id="level"
+                        type="range"
+                        min="0"
+                        max="9"
+                        step="1"
+                        value="0"
+                        aria-label="Sierpinski Stufe"
+                    />
+                    <output id="levelValue">0</output>
+                </div>
+                <div aria-hidden="true">&nbsp;</div>
+            </div>
+
+            <div class="canvas-wrap" id="canvasContainer">
+                <canvas id="sierCanvas" width="800" height="200"></canvas>
+            </div>
+        </main>
+
+        <script>
+            (function () {
+                const slider = document.getElementById("level");
+                const levelValue = document.getElementById("levelValue");
+                const canvas = document.getElementById("sierCanvas");
+                const container = document.getElementById("canvasContainer");
+                const ctx = canvas.getContext("2d");
+
+                function setLevelDisplay(v) {
+                    levelValue.textContent = String(v);
+                }
+
+                window.drawSierpinski = function (level, ctx, width, height) {
+                    drawEquilateralTriangle(
+                        ctx,
+                        width / 2,
+                        0,
+                        width / 2,
+                        "white",
+                    );
+                    drawSierpinskiImpl(ctx, level, width / 2, 0, width, "white");
+                };
+
+                function drawSierpinskiImpl(
+                    ctx,
+                    level,
+                    apexX,
+                    apexY,
+                    side,
+                    color,
+                ) {
+                    if (level <= 1) {
+                        drawEquilateralTriangleUpsideDown(
+                            ctx,
+                            apexX,
+                            apexY,
+                            side,
+                            color,
+                        );
+                    } else {
+                        drawSierpinskiImpl(
+                            ctx,
+                            --level,
+                            (3 * apexX) / 4,
+                            side / 2,
+                            side / 2,
+                            "black",
+                        );
+
+                        // drawSierpinskiImpl(
+                        //     ctx,
+                        //     --level,
+                        //     apexX + side / 4,
+                        //     side / 2,
+                        //     side / 2,
+                        //     "white",
+                        // );
+                        // drawSierpinskiImpl(
+                        //     ctx,
+                        //     --level,
+                        //     (3 * apexX) / 4,
+                        //     side / 2,
+                        //     side / 2,
+                        //     "green",
+                        // );
+                    }
+                }
+                function drawEquilateralTriangleUpsideDown(
+                    ctx,
+                    apexX,
+                    apexY,
+                    side,
+                    color,
+                ) {
+                    const h = (side * Math.sqrt(3)) / 2;
+                    const leftX = apexX - side / 2;
+                    const rightX = apexX + side / 2;
+                    const bottomY = apexY + h;
+
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.moveTo(leftX, apexY);
+                    ctx.lineTo(rightX, apexY);
+                    ctx.lineTo(apexX, bottomY);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fill();
+                }
+
+                function drawEquilateralTriangle(ctx, apexX, apexY, side, color) {
+                    const h = (side * Math.sqrt(3)) / 2;
+                    const leftX = apexX - side / 2;
+                    const rightX = apexX + side / 2;
+                    const bottomY = apexY + h;
+
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.moveTo(apexX, apexY);
+                    ctx.lineTo(rightX, bottomY);
+                    ctx.lineTo(leftX, bottomY);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fill();
+                }
+
+                function callDraw(level) {
+                    if (typeof window.drawSierpinski === "function") {
+                        // clear canvas before drawing
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        const cssW = canvas.clientWidth;
+                        const cssH = canvas.clientHeight;
+                        window.drawSierpinski(level, ctx, cssW, cssH);
+                    } else {
+                        // Keine Logik vorhanden: zeige eine dezente Platzhalteranzeige
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.save();
+                        ctx.fillStyle = "#222";
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.restore();
+                    }
+                }
+
+                function onInput() {
+                    const lvl = Number(slider.value);
+                    setLevelDisplay(lvl);
+                    callDraw(lvl);
+                }
+
+                function resizeCanvas() {
+                    const rect = container.getBoundingClientRect();
+                    const dpr = Math.max(1, window.devicePixelRatio || 1);
+                    const w = Math.floor(rect.width);
+                    const h = Math.max(
+                        200,
+                        Math.floor(window.innerHeight * 0.45),
+                    );
+                    canvas.style.width = w + "px";
+                    canvas.style.height = h + "px";
+                    canvas.width = Math.floor(w * dpr);
+                    canvas.height = Math.floor(h * dpr);
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                    // rufe mit CSS-Größe auf
+                    callDraw(Number(slider.value), w, h);
+                }
+
+                // initial setup
+                setLevelDisplay(slider.value);
+                slider.addEventListener("input", onInput, { passive: true });
+                window.addEventListener("resize", resizeCanvas);
+                // ensure canvas sized correctly on load
+                window.addEventListener("DOMContentLoaded", resizeCanvas);
+                // in case the file is opened without DOMContentLoaded firing
+                resizeCanvas();
+
+                // Expose a small API to let you programmatically set the level
+                window.sierpinskiUI = {
+                    setLevel(l) {
+                        slider.value = String(l);
+                        onInput();
+                    },
+                    getLevel() {
+                        return Number(slider.value);
+                    },
+                    canvasEl: canvas,
+                    ctx: ctx,
+                };
+            })();
+        </script>
+    </body>
+</html>

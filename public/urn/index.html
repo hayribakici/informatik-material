@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="de">
+    <!--Partially Vibe Coded-->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Urnenmodell Generator</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+        <style>
+            body {
+                font-family: sans-serif;
+                display: flex;
+                gap: 1vw;
+            }
+
+            #left {
+                width: 24vw;
+                display: flex;
+                flex-direction: column;
+                gap: 1vh;
+            }
+
+            .row {
+                display: flex;
+                gap: 0.5vw;
+                margin-bottom: 0.5vh;
+            }
+
+            .row input {
+                padding: 0.5vh 0.5vw;
+                font-size: 1em;
+            }
+
+            #right {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2vh;
+            }
+
+            #urn-container {
+                position: relative;
+                width: 210px;
+                height: 210px;
+            }
+
+            #urn-image {
+                position: absolute;
+                width: 210px;
+                height: 210px;
+                pointer-events: none;
+                top: 0;
+                left: 0;
+            }
+
+            #canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 210px;
+                height: 210px;
+            }
+
+            #buttons {
+                display: flex;
+                gap: 1vw;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="left">
+            <div id="rows"></div>
+            <button id="addRow"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <div id="right">
+            <div id="urn-container">
+                <img id="urn-image" src="urn.png" />
+                <canvas id="canvas"></canvas>
+            </div>
+            <div id="buttons">
+                <button id="downloadBtn">
+                    <i class="fa-solid fa-download"></i>
+                </button>
+                <button id="copyBtn"><i class="fa-solid fa-copy"></i></button>
+            </div>
+        </div>
+
+        <script>
+            const rows = document.getElementById("rows");
+            const addRowBtn = document.getElementById("addRow");
+            const downloadBtn = document.getElementById("downloadBtn");
+            const copyBtn = document.getElementById("copyBtn");
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+
+            const urnImage = new Image();
+            urnImage.src = "./urn.png";
+            ("2d");
+
+            addRowBtn.addEventListener("click", () => addRow());
+            addRow();
+
+            downloadBtn.addEventListener("click", function () {
+                var link = document.createElement("a");
+                link.download = "urne.png";
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+
+            copyBtn.addEventListener("click", function () {
+                canvas.toBlob(function (blob) {
+                    navigator.clipboard.write([
+                        new ClipboardItem({ "image/png": blob }),
+                    ]);
+                });
+            });
+
+            function addRow(color = "", count = 1) {
+                const row = document.createElement("div");
+                row.className = "row";
+
+                const colorInput = document.createElement("input");
+                colorInput.className = "color";
+                colorInput.placeholder = "Farbe";
+                colorInput.value = color;
+
+                const countInput = document.createElement("input");
+                countInput.type = "number";
+                countInput.style.width = "3vw";
+                countInput.min = 0;
+                countInput.value = count;
+
+                const delBtn = document.createElement("button");
+                delBtn.innerHTML = '<i class="fa-solid fa-minus"></i>';
+                delBtn.style.width = "2vw";
+                delBtn.addEventListener("click", () => {
+                    row.remove();
+                    update();
+                });
+
+                colorInput.addEventListener("input", update);
+                countInput.addEventListener("input", update);
+
+                row.appendChild(colorInput);
+                row.appendChild(countInput);
+                row.appendChild(delBtn);
+                rows.appendChild(row);
+
+                update();
+            }
+
+            function update() {
+                const allRows = document.querySelectorAll("#rows .row");
+                let balls = [];
+
+                allRows.forEach((r) => {
+                    const color = r.children[0].value.trim();
+                    if (!isValidColor(color)) return;
+                    const count = parseInt(r.children[1].value) || 0;
+                    for (let i = 0; i < count; i++) balls.push(color);
+                });
+
+                drawBalls(balls);
+            }
+
+            function drawBalls(balls) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (urnImage.complete) {
+                    ctx.drawImage(urnImage, 0, 0, canvas.width, canvas.height);
+                }
+
+                const cx = canvas.width / 2;
+                const cy = canvas.height / 2;
+
+                const urnRadius = 82;
+                const r = 8;
+                const pad = 2;
+
+                let y = cy + urnRadius - r - 1;
+
+                function rowMaxWidth(y) {
+                    const dy = cy - y;
+                    const w = Math.sqrt(
+                        Math.max(urnRadius * urnRadius - dy * dy, 0),
+                    );
+                    return w * 2;
+                }
+
+                function drawRow(colors, y) {
+                    const spacing = 2 * r + pad;
+                    const totalWidth = colors.length * spacing;
+                    const startX = cx - totalWidth / 2 + r;
+
+                    colors.forEach((color, i) => {
+                        const x = startX + i * spacing;
+
+                        ctx.beginPath();
+                        ctx.arc(x, y, r, 0, Math.PI * 2);
+                        ctx.fillStyle = color;
+                        ctx.fill();
+                        ctx.stroke();
+                    });
+                }
+
+                let row = [];
+                let rowWidth = 0;
+                let maxWidth = rowMaxWidth(y);
+
+                balls.forEach((color) => {
+                    const ballWidth = 2 * r + pad;
+
+                    if (rowWidth + ballWidth > maxWidth) {
+                        drawRow(row, y);
+                        row = [];
+                        rowWidth = 0;
+
+                        y -= 2 * r + pad;
+                        maxWidth = rowMaxWidth(y);
+                    }
+
+                    row.push(color);
+                    rowWidth += ballWidth;
+                });
+
+                if (row.length > 0) {
+                    drawRow(row, y);
+                }
+            }
+
+            function isValidColor(str) {
+                var s = document.createElement("div");
+                s.style.color = str;
+                return s.style.color !== "";
+            }
+        </script>
+    </body>
+</html>
