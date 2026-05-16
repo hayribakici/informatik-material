@@ -1,0 +1,12 @@
+author = 'hayribakici'
+
+[home]
+	date_format = '2006-01-02'
+	portfolio = true
+	blog = false
+	old_projects = false
+
+[socials]
+	[socials.1]
+		title = 'github'
+		url = 'https://github.com/hayribakici'

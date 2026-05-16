@@ -1,0 +1,17 @@
+[projects]
+	[projects.1]
+		title = 'Steckbrief'
+		url = 'steckbrief/index.html'
+		description = 'Formular zur Einführung und Unterscheidung von Datentypen `String`, `int`, `float` und `bool`'
+	[projects.2]
+		title = 'InformaSinn'
+		url = 'informasinn/index.html'
+		description = 'Ein kleines Programm, das Daten aufnimmt und ensprechende Informationen über diese ausgibt.'
+	[projects.3]
+		title = 'Urnenmodell Generator'
+		url = 'urn/index.html'
+		description = 'Kleines Werkzeug zum Erzeugen von Urnenmodellen.'
+	[projects.4]
+		title = 'Obsidian-Scratchblocks'
+		url = 'https://community.obsidian.md/account/plugins/scratchblocks'
+		description = 'Scratchblocks in Obsidian darstellen.'
