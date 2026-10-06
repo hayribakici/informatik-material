@@ -3,7 +3,7 @@
   command = "hugo --gc --minify"
 
 [functions]
-  directory = "netlify/functions/hf_proxy"
+  directory = "netlify/functions"
 
 
 [context.production.environment]
