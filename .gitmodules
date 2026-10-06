@@ -3,4 +3,4 @@
 	url = https://github.com/alex-shpak/hugo-book
 [submodule "themes/moonwalk-hugo"]
 	path = themes/moonwalk-hugo
-	url = git@github.com:ArkhamCookie/moonwalk-hugo.git
+	url = https://github.com/ArkhamCookie/moonwalk-hugo.git
