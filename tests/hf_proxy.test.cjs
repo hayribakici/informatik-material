@@ -73,7 +73,7 @@ test('fixed destination, server token, no redirects and unchanged Flutter respon
   assert.equal(options.redirect, 'error');
   assert.ok(options.signal instanceof AbortSignal);
   assert.deepEqual(JSON.parse(options.body), {
-    model: 'mistralai/Mistral-7B-Instruct-v0.2:featherless-ai', stream: false,
+    model: 'Qwen/Qwen3-32B', stream: false,
     messages: [{ role: 'user', content: 'Hello' }],
   });
 });

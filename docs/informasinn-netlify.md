@@ -33,7 +33,7 @@ browser assets. No token is needed to run the mocked tests.
 Send POST with `Content-Type: application/json` and a JSON object containing a
 nonblank string `prompt`. An optional nonblank string `model` selects a model at
 the fixed Hugging Face router. The default is
-`mistralai/Mistral-7B-Instruct-v0.2:featherless-ai`.
+`Qwen/Qwen3-32B`.
 Query-string prompts/models are not used. Body or query `url` overrides are
 rejected. Authorization comes exclusively from the server's `HF_TOKEN`.
 Redirects are refused and upstream requests time out after 25 seconds.

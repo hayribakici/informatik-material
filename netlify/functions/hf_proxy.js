@@ -1,5 +1,5 @@
 const UPSTREAM_URL = 'https://router.huggingface.co/v1/chat/completions';
-const DEFAULT_MODEL = 'mistralai/Mistral-7B-Instruct-v0.2:featherless-ai';
+const DEFAULT_MODEL = 'Qwen/Qwen3-32B';
 
 function json(statusCode, payload, headers = {}) {
   return {
