@@ -1,0 +1,105 @@
+<!doctype html>
+<!--
+MIT License
+
+Copyright (c) 2026 Hayri Bakici (GitHub: hayribakici)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b57d0">
+  <title>Pixel-Labor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    {"imports":{"@material/web/":"https://esm.run/@material/web/"}}
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="layout">
+    <section class="workspace" aria-label="Pixelraster">
+        <aside id="settings" class="settings" aria-labelledby="settings-title">
+          <h1>Pixel-Labor</h1>
+          <p class="settings-intro">Verändere dazu die Rot-, Grün- und Blauwerte einzelner Pixel.</p>
+
+          <hr class="settings-divider">
+          <h2 id="settings-title">Einstellungen</h2>
+          <div class="controls">
+          <div class="size-control">
+            <label id="pixel-size-label" for="pixel-size">Pixelgröße</label>
+            <output id="pixel-size-value" for="pixel-size">40 px</output>
+            <md-slider id="pixel-size" min="20" max="80" value="40" step="1" aria-labelledby="pixel-size-label"></md-slider>
+          </div>
+          <div class="values-settings">
+          <label class="toggle">Werte anzeigen <md-switch id="values-toggle" selected></md-switch></label>
+          <fieldset id="format" class="format-options" aria-label="Darstellung">
+            <label><md-radio name="format" value="dec" checked aria-label="Dezimal"></md-radio>Dezimal</label>
+            <label><md-radio name="format" value="hex-rgb" aria-label="Hexadezimal (RGB)"></md-radio>Hexadezimal (RGB)</label>
+            <label><md-radio name="format" value="hex" aria-label="Hexadezimal (Web)"></md-radio>Hexadezimal (Web)</label>
+            <label><md-radio name="format" value="bin" aria-label="Binär (RGB)"></md-radio>Binär (RGB)</label>
+          </fieldset>
+          </div>
+          </div>
+        </aside>
+
+      <section class="image-actions" aria-label="Bild speichern oder laden">
+        <md-outlined-button id="upload-ppm" type="button">PPM laden <i class="fa-solid fa-upload action-icon" aria-hidden="true"></i></md-outlined-button>
+        <div class="download-menu">
+          <md-filled-button id="download-toggle" type="button" aria-expanded="false" aria-controls="download-options">Download <i class="fa-solid fa-download action-icon" aria-hidden="true"></i> <span aria-hidden="true">▾</span></md-filled-button>
+          <div id="download-options" class="download-options" role="menu" hidden>
+            <button id="download-png" type="button" role="menuitem">PNG speichern</button>
+            <button id="download-ppm" type="button" role="menuitem">PPM speichern</button>
+          </div>
+        </div>
+        <input id="ppm-file" type="file" accept=".ppm,.pnm,image/x-portable-pixmap,image/x-portable-anymap" hidden>
+        <p id="file-message" class="file-message" role="status" aria-live="polite" hidden></p>
+      </section>
+      <div class="grid-scroll" aria-label="Horizontal und vertikal verschiebbares Pixelraster">
+        <div id="grid" class="pixel-grid" role="group" aria-label="16 mal 16 bearbeitbare Pixel"></div>
+      </div>
+    </section>
+    <footer class="site-footer">Copyleft <span id="footer-year">2026</span> · Made with ❤️</footer>
+  </main>
+
+  <div id="editor" class="editor" role="dialog" aria-label="Pixelfarbe bearbeiten" aria-modal="false" hidden>
+    <div class="editor-heading">
+      <strong id="editor-title">Pixel bearbeiten</strong>
+      <span class="preview" id="preview" aria-label="Farbvorschau"></span>
+    </div>
+    <div class="channels">
+      <md-outlined-text-field id="red" label="Rot" type="text" inputmode="text"></md-outlined-text-field>
+      <md-outlined-text-field id="green" label="Grün" type="text" inputmode="text"></md-outlined-text-field>
+      <md-outlined-text-field id="blue" label="Blau" type="text" inputmode="text"></md-outlined-text-field>
+    </div>
+    <p id="error" class="error" role="alert" hidden>Ungültige Werte. Erlaubt: 0–255 oder 00–FF.</p>
+    <div class="editor-actions">
+      <md-text-button id="cancel" type="button">Abbrechen</md-text-button>
+      <md-filled-button id="save" type="button">OK</md-filled-button>
+    </div>
+  </div>
+</body>
+</html>
