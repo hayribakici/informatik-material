@@ -10,26 +10,26 @@ Eine Sammlung eigener Werkzeuge und externer Ressourcen für den Unterricht.
 
 | | |
 | --- | --- |
-| [Pixel-Labor](/pixelab/) | 16 × 16 Pixelbilder gestalten und RGB-Werte erkunden. |
-| {{< button href="https://www.csfieldguide.org.nz/en/interactives/pixel-viewer/" >}} Pixel Viewer ↗ {{< /button >}} | Bilder vergrößern und die Farbwerte einzelner Pixel untersuchen. |
+| {{< button href="/pixelab/" >}} Pixel-Labor ↗ {{</ button >}} | 16 × 16 Pixelbilder gestalten und RGB-Werte erkunden. |
+| {{< button href="https://www.csfieldguide.org.nz/en/interactives/pixel-viewer/" >}} Pixel Viewer ↗ {{</ button >}} | Bilder vergrößern und die Farbwerte einzelner Pixel untersuchen. |
 | {{< button href="https://d-murphy.github.io/BinaryColorPicker/" >}} BinaryColorPicker ↗ {{< /button >}} | Farben anhand binärer Farbwerte auswählen. |
 
 ## Daten und Datentypen
 
 | | |
 | --- | --- |
-| [Steckbrief](/steckbrief/) | String, int, float und bool im Formular kennenlernen. |
-| [InformaSinn](/informasinn/) | Aus Daten Informationen gewinnen. |
+| {{< button href="/steckbrief" >}} Steckbrief ↗ {{</ button >}} | Datentypen `String`, `int`, `float` und `bool` im Formular entdecken. |
+| {{< button href="/informasinn/" >}} InformaSinn ↗ {{</ button >}}| Aus Daten Informationen gewinnen. |
 
 ## Modelle und Simulationen
 
 | | |
 | --- | --- |
-| [Urnenmodell Generator](/urn/) | Urnenmodelle erzeugen. |
-| {{< button href="https://www.wissenschaftsjahr.de/2019/jugendaktion/" >}} Mensch Maschine ↗ {{</button >}} | Brettspiel über maschinellem Lernen zum Ausdrucken |
+| {{< button href="/urn/" >}} Urnenmodell Generator ↗ {{</ button >}} | Urnenmodelle erzeugen. |
+| {{< button href="https://www.wissenschaftsjahr.de/2019/jugendaktion/" >}} Mensch Maschine ↗ {{</ button >}} | Brettspiel über maschinellem Lernen zum Ausdrucken |
 
 ## Programmierung
 
 | | |
 | --- | --- |
-| {{< button href="https://community.obsidian.md/account/plugins/scratchblocks" >}}Obsidian-Scratchblocks ↗{{< /button >}} | Scratchblocks in Obsidian darstellen. |
+| {{< button href="https://community.obsidian.md/account/plugins/scratchblocks" >}}Obsidian-Scratchblocks ↗{{</ button >}} | Scratchblocks in Obsidian darstellen. |
