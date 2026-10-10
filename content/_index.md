@@ -34,3 +34,4 @@ Eine Sammlung eigener Werkzeuge und externer Ressourcen für den Unterricht.
 | | |
 | --- | --- |
 | {{< button href="https://community.obsidian.md/account/plugins/scratchblocks" >}}Obsidian-Scratchblocks ↗{{</ button >}} | Scratchblocks in Obsidian darstellen. |
+| {{< button href="https://cscircles.cemc.uwaterloo.ca/" >}}Computer Science Circles ↗{{< /button >}} | Python schrittweise lernen und Programmieraufgaben direkt im Browser lösen. |
