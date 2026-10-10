@@ -1,4 +1,5 @@
-baseURL = '/'
+baseURL = 'https://info-material.netlify.app/'
+enableRobotsTXT = true
 languageCode = 'de-de'
 title = 'Materialien für den Informatikunterricht'
 theme = "hugo-book"

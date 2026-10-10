@@ -1,5 +1,6 @@
 ---
 title: "Werkzeuge für den Informatikunterricht"
+description: "Interaktive Werkzeuge und Unterrichtsmaterialien für Informatik: Pixelbilder, RGB-Farben, Datentypen, Simulationen und Programmierung."
 ---
 
 # Werkzeuge für den Informatikunterricht
