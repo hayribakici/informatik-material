@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Categories on Materialien für den Informatikunterricht</title>
-    <link>//localhost:1313/categories/</link>
-    <description>Recent content in Categories on Materialien für den Informatikunterricht</description>
-    <generator>Hugo</generator>
-    <language>de-de</language>
-    <atom:link href="//localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
-  </channel>
+	<channel>
+		<title>Categories on Materialien für den Informatikunterricht</title>
+		<link>//localhost:1313/categories/</link>
+		<description>Recent content in Categories on Materialien für den Informatikunterricht</description>
+		<generator>Hugo</generator>
+		<language>de-de</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Daten Und Datentypen</title>
+				<link>//localhost:1313/categories/daten-und-datentypen/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/categories/daten-und-datentypen/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Modelle Und Simulationen</title>
+				<link>//localhost:1313/categories/modelle-und-simulationen/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/categories/modelle-und-simulationen/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Pixel Und Bilder</title>
+				<link>//localhost:1313/categories/pixel-und-bilder/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/categories/pixel-und-bilder/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Programmierung</title>
+				<link>//localhost:1313/categories/programmierung/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/categories/programmierung/</guid>
+				<description></description>
+			</item>
+	</channel>
 </rss>

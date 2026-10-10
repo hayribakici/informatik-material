@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>RGB on Materialien für den Informatikunterricht</title>
+		<link>//localhost:1313/tags/rgb/</link>
+		<description>Recent content in RGB on Materialien für den Informatikunterricht</description>
+		<generator>Hugo</generator>
+		<language>de-de</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/tags/rgb/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Pixel-Labor</title>
+				<link>//localhost:1313/tools/pixel-labor/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/tools/pixel-labor/</guid>
+				<description>&lt;h1 id=&#34;pixel-labor&#34;&gt;Pixel-Labor&lt;a class=&#34;anchor&#34; href=&#34;#pixel-labor&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Erstelle ein 16 × 16 Pixelbild und verändere einzelne RGB-Werte.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/pixelab/&#34;&gt;/pixelab/&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

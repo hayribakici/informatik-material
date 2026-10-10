@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Interaktiv on Materialien für den Informatikunterricht</title>
+		<link>//localhost:1313/tags/interaktiv/</link>
+		<description>Recent content in Interaktiv on Materialien für den Informatikunterricht</description>
+		<generator>Hugo</generator>
+		<language>de-de</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/tags/interaktiv/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>InformaSinn</title>
+				<link>//localhost:1313/tools/informasinn/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/tools/informasinn/</guid>
+				<description>&lt;h1 id=&#34;informasinn&#34;&gt;InformaSinn&lt;a class=&#34;anchor&#34; href=&#34;#informasinn&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Ein kleines Programm, das Daten aufnimmt und Informationen über diese ausgibt.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/informasinn/index.html&#34;&gt;/informasinn/index.html&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Pixel-Labor</title>
+				<link>//localhost:1313/tools/pixel-labor/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/tools/pixel-labor/</guid>
+				<description>&lt;h1 id=&#34;pixel-labor&#34;&gt;Pixel-Labor&lt;a class=&#34;anchor&#34; href=&#34;#pixel-labor&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Erstelle ein 16 × 16 Pixelbild und verändere einzelne RGB-Werte.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/pixelab/&#34;&gt;/pixelab/&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Steckbrief</title>
+				<link>//localhost:1313/tools/steckbrief/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/tools/steckbrief/</guid>
+				<description>&lt;h1 id=&#34;steckbrief&#34;&gt;Steckbrief&lt;a class=&#34;anchor&#34; href=&#34;#steckbrief&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Formular zur Einführung und Unterscheidung der Datentypen String, int, float und bool.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/steckbrief/index.html&#34;&gt;/steckbrief/index.html&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Urnenmodell Generator</title>
+				<link>//localhost:1313/tools/urnenmodell/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/tools/urnenmodell/</guid>
+				<description>&lt;h1 id=&#34;urnenmodell-generator&#34;&gt;Urnenmodell Generator&lt;a class=&#34;anchor&#34; href=&#34;#urnenmodell-generator&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Ein Werkzeug zum Erzeugen von Urnenmodellen.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/urn/index.html&#34;&gt;/urn/index.html&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

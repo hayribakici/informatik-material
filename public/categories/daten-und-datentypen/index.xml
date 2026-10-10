@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Daten Und Datentypen on Materialien für den Informatikunterricht</title>
+		<link>//localhost:1313/categories/daten-und-datentypen/</link>
+		<description>Recent content in Daten Und Datentypen on Materialien für den Informatikunterricht</description>
+		<generator>Hugo</generator>
+		<language>de-de</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/categories/daten-und-datentypen/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>InformaSinn</title>
+				<link>//localhost:1313/tools/informasinn/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/tools/informasinn/</guid>
+				<description>&lt;h1 id=&#34;informasinn&#34;&gt;InformaSinn&lt;a class=&#34;anchor&#34; href=&#34;#informasinn&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Ein kleines Programm, das Daten aufnimmt und Informationen über diese ausgibt.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/informasinn/index.html&#34;&gt;/informasinn/index.html&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Steckbrief</title>
+				<link>//localhost:1313/tools/steckbrief/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/tools/steckbrief/</guid>
+				<description>&lt;h1 id=&#34;steckbrief&#34;&gt;Steckbrief&lt;a class=&#34;anchor&#34; href=&#34;#steckbrief&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Formular zur Einführung und Unterscheidung der Datentypen String, int, float und bool.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/steckbrief/index.html&#34;&gt;/steckbrief/index.html&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

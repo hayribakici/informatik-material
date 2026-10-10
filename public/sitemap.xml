@@ -6,10 +6,50 @@
     <lastmod>2026-04-14T17:52:14+02:00</lastmod>
   </url><url>
     <loc>//localhost:1313/</loc>
-    <lastmod>2025-10-01T19:59:28+02:00</lastmod>
+    <lastmod>2026-04-14T17:52:14+02:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/bilder/</loc>
   </url><url>
     <loc>//localhost:1313/categories/</loc>
   </url><url>
+    <loc>//localhost:1313/tags/daten/</loc>
+  </url><url>
+    <loc>//localhost:1313/categories/daten-und-datentypen/</loc>
+  </url><url>
+    <loc>//localhost:1313/tags/datentypen/</loc>
+  </url><url>
+    <loc>//localhost:1313/tags/dokumentation/</loc>
+  </url><url>
+    <loc>//localhost:1313/tools/informasinn/</loc>
+  </url><url>
+    <loc>//localhost:1313/tags/information/</loc>
+  </url><url>
+    <loc>//localhost:1313/tags/interaktiv/</loc>
+  </url><url>
+    <loc>//localhost:1313/tags/modelle/</loc>
+  </url><url>
+    <loc>//localhost:1313/categories/modelle-und-simulationen/</loc>
+  </url><url>
+    <loc>//localhost:1313/tags/obsidian/</loc>
+  </url><url>
+    <loc>//localhost:1313/tools/obsidian-scratchblocks/</loc>
+  </url><url>
+    <loc>//localhost:1313/categories/pixel-und-bilder/</loc>
+  </url><url>
+    <loc>//localhost:1313/tools/pixel-labor/</loc>
+  </url><url>
+    <loc>//localhost:1313/categories/programmierung/</loc>
+  </url><url>
+    <loc>//localhost:1313/tags/rgb/</loc>
+  </url><url>
+    <loc>//localhost:1313/tags/scratch/</loc>
+  </url><url>
+    <loc>//localhost:1313/tools/steckbrief/</loc>
+  </url><url>
     <loc>//localhost:1313/tags/</loc>
+  </url><url>
+    <loc>//localhost:1313/tools/</loc>
+  </url><url>
+    <loc>//localhost:1313/tools/urnenmodell/</loc>
   </url>
 </urlset>

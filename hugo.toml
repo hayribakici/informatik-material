@@ -1,4 +1,43 @@
 baseURL = '/'
 languageCode = 'de-de'
 title = 'Materialien für den Informatikunterricht'
-theme = "moonwalk-hugo"
+theme = "hugo-book"
+
+defaultContentLanguage = 'de'
+
+[params]
+  BookTheme = 'light'
+  BookToC = false
+  BookSection = 'docs'
+  BookSearch = true
+  BookComments = false
+
+[[menu.before]]
+  name = 'Alle Werkzeuge'
+  url = '/'
+  weight = 1
+
+[[menu.before]]
+  name = 'Pixel und Bilder'
+  url = '/#pixel-und-bilder'
+  weight = 2
+
+[[menu.before]]
+  name = 'Daten und Datentypen'
+  url = '/#daten-und-datentypen'
+  weight = 3
+
+[[menu.before]]
+  name = 'Modelle und Simulationen'
+  url = '/#modelle-und-simulationen'
+  weight = 4
+
+[[menu.before]]
+  name = 'Programmierung'
+  url = '/#programmierung'
+  weight = 5
+
+[[menu.after]]
+  name = 'Spiele'
+  pageRef = '/spiele'
+  weight = 1

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Programmierung on Materialien für den Informatikunterricht</title>
+		<link>//localhost:1313/categories/programmierung/</link>
+		<description>Recent content in Programmierung on Materialien für den Informatikunterricht</description>
+		<generator>Hugo</generator>
+		<language>de-de</language>
+		
+		
+		
+		
+			<atom:link href="//localhost:1313/categories/programmierung/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Obsidian-Scratchblocks</title>
+				<link>//localhost:1313/tools/obsidian-scratchblocks/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//localhost:1313/tools/obsidian-scratchblocks/</guid>
+				<description>&lt;h1 id=&#34;obsidian-scratchblocks&#34;&gt;Obsidian-Scratchblocks&lt;a class=&#34;anchor&#34; href=&#34;#obsidian-scratchblocks&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Scratchblocks in Obsidian darstellen.&lt;/p&gt;&#xA;&lt;a href=&#34;https://community.obsidian.md/account/plugins/scratchblocks&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34; class=&#34;book-btn&#34;&gt;Ressource öffnen ↗&lt;/a&gt;</description>
+			</item>
+	</channel>
+</rss>
