@@ -137,7 +137,6 @@ const valuesToggle = document.querySelector('#values-toggle');
 const settings = document.querySelector('#settings');
 const pixelSize = document.querySelector('#pixel-size');
 const pixelSizeValue = document.querySelector('#pixel-size-value');
-const preview = document.querySelector('#preview');
 const error = document.querySelector('#error');
 const editorTitle = document.querySelector('#editor-title');
 const ppmFileInput = document.querySelector('#ppm-file');
@@ -148,6 +147,7 @@ let importToastTimer;
 const downloadToggle = document.querySelector('#download-toggle');
 const downloadOptions = document.querySelector('#download-options');
 let selected = null;
+let originalColor = null;
 let cleanupPosition = null;
 let format = 'dec';
 let valuesEnabled = true;
@@ -196,7 +196,7 @@ function paint(index, values) {
   cell.style.backgroundColor = color(values);
   cell.style.color = contrast(values);
   cell.querySelector('.value').textContent = representation(values);
-  cell.setAttribute('aria-label', `Pixel ${index % SIZE + 1}, ${Math.floor(index / SIZE) + 1}; Rot ${values[0]}, Grün ${values[1]}, Blau ${values[2]}`);
+  cell.setAttribute('aria-label', `Pixel ${index % SIZE}, ${Math.floor(index / SIZE)}; Rot ${values[0]}, Grün ${values[1]}, Blau ${values[2]}`);
 }
 
 function closeEditor() {
@@ -208,7 +208,14 @@ function closeEditor() {
   grid.children[selected].setAttribute('aria-pressed', 'false');
   grid.children[selected].focus();
   selected = null;
+  originalColor = null;
   error.hidden = true;
+}
+
+function cancelEditor() {
+  if (selected === null) return;
+  pixels[selected] = [...originalColor];
+  closeEditor();
 }
 
 function showInputError() {
@@ -217,33 +224,22 @@ function showInputError() {
   fields.find(field => parseField(field.value) === null)?.focus();
 }
 
-function save() {
-  if (selected === null) return;
-  const input = getInput();
-  if (!input) {
-    showInputError();
-    return;
-  }
-  pixels[selected] = input;
-  closeEditor();
-}
-
-function updatePreview() {
+function updatePixelColor() {
   if (selected === null) return;
   const input = getInput();
   error.hidden = true;
   if (!input) return;
+  pixels[selected] = input;
   paint(selected, input);
-  preview.style.backgroundColor = color(input);
 }
 
 function openEditor(index) {
   closeEditor();
   selected = index;
+  originalColor = [...pixels[index]];
   grid.children[index].setAttribute('aria-pressed', 'true');
-  editorTitle.textContent = `Pixel (${index % SIZE + 1}, ${Math.floor(index / SIZE) + 1})`;
+  editorTitle.textContent = `Pixel (${index % SIZE}, ${Math.floor(index / SIZE)})`;
   fields.forEach((field, i) => setFieldValue(field, fieldValue(pixels[index][i])));
-  preview.style.backgroundColor = color(pixels[index]);
   error.hidden = true;
   editor.hidden = false;
   cleanupPosition = autoUpdate(grid.children[index], editor, () => {
@@ -277,7 +273,7 @@ function handleChannelInput(event) {
     return;
   }
   acceptedFieldValues.set(field, value);
-  updatePreview();
+  updatePixelColor();
 }
 
 function handleChannelArrowKey(event) {
@@ -288,7 +284,7 @@ function handleChannelArrowKey(event) {
   const increment = event.key === 'ArrowUp' ? 1 : -1;
   const nextValue = Math.max(0, Math.min(255, currentValue + increment));
   setFieldValue(field, fieldValue(nextValue));
-  updatePreview();
+  updatePixelColor();
 }
 
 fields.forEach(field => {
@@ -298,11 +294,14 @@ fields.forEach(field => {
 });
 
 editor.addEventListener('keydown', event => {
-  if (event.key === 'Escape') { event.preventDefault(); closeEditor(); }
-  if (event.key === 'Enter') { event.preventDefault(); save(); }
+  if (event.key === 'Escape') { event.preventDefault(); cancelEditor(); }
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    if (getInput()) closeEditor();
+    else showInputError();
+  }
 });
-document.querySelector('#cancel').addEventListener('click', closeEditor);
-document.querySelector('#save').addEventListener('click', save);
+document.querySelector('#cancel').addEventListener('click', cancelEditor);
 
 formatOptions.addEventListener('change', () => {
   const draft = selected === null ? null : getInput();

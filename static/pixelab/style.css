@@ -84,7 +84,6 @@ h2 { font-size: 1.3rem; font-weight: 500; margin: 0 0 4px; }
 .editor { position: fixed; top: 0; left: 0; z-index: 30; width: min(340px, calc(100vw - 24px)); padding: 18px; border-radius: 20px; background: #fff; border: 1px solid #d7dbe7; box-shadow: 0 12px 35px #141f3540; }
 .editor[hidden], .error[hidden] { display: none; }
 .editor-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-.preview { flex: none; display: block; width: 32px; height: 32px; border: 1px solid #abb3c1; border-radius: 10px; }
 .channels { display: grid; gap: 10px; }
 .channels md-outlined-text-field { width: 100%; }
 .channels #red {
